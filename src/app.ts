@@ -6,6 +6,8 @@ export interface Kit {
 
 export interface Config {
   port: number;
+  url: string;
+  token: string;
 }
 
 export function makeConfig(config: Partial<Config>): Config {

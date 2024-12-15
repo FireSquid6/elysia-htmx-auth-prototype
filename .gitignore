@@ -3,3 +3,5 @@
 
 node_modules
 static/generated.css
+
+.env.local
