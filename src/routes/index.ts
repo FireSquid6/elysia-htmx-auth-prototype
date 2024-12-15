@@ -1,16 +1,15 @@
 import Elysia from "elysia";
-import type { Kit } from "@/app";
 import { cors } from "@elysiajs/cors";
 import { html } from "@elysiajs/html";
 import { Logestic } from "logestic";
 import staticPlugin from "@elysiajs/static";
 import { homePlugin } from "./home";
+import { kitPlugin } from "@/app";
 
-export const kitPlugin = new Elysia()
-  .state("kit", {} as Kit)
+
 
 export const app = new Elysia()
-  .use(kitPlugin)
+  .use(kitPlugin())
   .use(cors())
   .use(html())
   .use(staticPlugin({

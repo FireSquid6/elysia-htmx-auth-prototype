@@ -1,4 +1,5 @@
 import { app } from "@/routes";
+import { Elysia } from "elysia";
 import { getDb, type Database } from "./db";
 
 export interface Kit {
@@ -10,6 +11,11 @@ export interface Config {
   port: number;
   url: string;
   token: string;
+}
+
+export function kitPlugin() {
+  return new Elysia()
+    .state("kit", {} as Kit)
 }
 
 export function makeConfig(config: Partial<Config>): Config {

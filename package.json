@@ -4,7 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "bun run tailwind && bun run entrypoints/dev.ts",
-    "tailwind": "bunx tailwindcss -i ./static/main.css -o ./static/generated.css"
+    "tailwind": "bunx tailwindcss -i ./static/main.css -o ./static/generated.css",
+    "push": "bunx drizzle-kit push --config=drizzle.config.ts",
+    "generate": "bunx drizzle-kit generate --config=drizzle.config.ts",
+    "migrate": "bunx drizzle-kit migrate --config=drizzle.config.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -23,6 +26,7 @@
     "@libsql/client": "^0.14.0",
     "drizzle-orm": "^0.38.2",
     "elysia": "^1.1.26",
-    "logestic": "^1.2.4"
+    "logestic": "^1.2.4",
+    "uuid": "^11.0.3"
   }
 }
