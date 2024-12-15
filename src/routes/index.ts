@@ -1,6 +1,7 @@
 import Elysia from "elysia";
 import type { Kit } from "@/app";
 import { cors } from "@elysiajs/cors";
+import { html } from "@elysiajs/html";
 import { Logestic } from "logestic";
 
 export const kitPlugin = new Elysia()
@@ -9,6 +10,7 @@ export const kitPlugin = new Elysia()
 export const app = new Elysia()
   .use(kitPlugin)
   .use(cors())
+  .use(html())
   .use(Logestic.preset("common"))
   .get("/", () => {
     return "hello, world!"
