@@ -1,9 +1,9 @@
 # TODO
 ## Basic
-- [ ] navigable pages
-- [ ] htmx
-- [ ] tailwindcss
-- [ ] communicate with database
+- [x] navigable pages
+- [x] htmx
+- [x] tailwindcss
+- [x] communicate with database
 - [ ] signup / login
 - [ ] creating posts
 
