@@ -24,6 +24,7 @@
     "@elysiajs/static": "^1.1.1",
     "@kitajs/html": "^4.2.5",
     "@libsql/client": "^0.14.0",
+    "@oslojs/encoding": "^1.1.0",
     "drizzle-orm": "^0.38.2",
     "elysia": "^1.1.26",
     "logestic": "^1.2.4",

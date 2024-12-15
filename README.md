@@ -4,7 +4,11 @@
 - [x] htmx
 - [x] tailwindcss
 - [x] communicate with database
-- [ ] signup / login
+- [ ] auth
+    - [ ] session management
+    - [ ] 2fa
+    - [ ] oauth
+    - [ ] password reset
 - [ ] creating posts
 
 
