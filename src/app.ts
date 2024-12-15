@@ -30,5 +30,4 @@ export function startApp(c: Partial<Config>) {
   app.listen(config.port, () => {
     console.log(`App started on ${config.port}`);
   })
-
 }
