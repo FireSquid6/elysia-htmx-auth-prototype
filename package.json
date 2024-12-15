@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun run entrypoints/dev.ts"
+    "dev": "bun run tailwind && bun run entrypoints/dev.ts",
+    "tailwind": "bunx tailwindcss -i ./static/main.css -o ./static/generated.css"
   },
   "devDependencies": {
     "@types/bun": "latest"
