@@ -9,7 +9,5 @@ export function getDb(config: Config) {
       url: config.url,
       authToken: config.token,
     }
-
   })
-
 }
