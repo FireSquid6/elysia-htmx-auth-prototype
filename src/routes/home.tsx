@@ -1,11 +1,10 @@
-import { Elysia, t } from "elysia";
+import { Elysia } from "elysia";
 import { Html } from "@kitajs/html";
 import { BaseLayout } from "@/layouts/base";
 import { kitPlugin } from "@/app";
-import { usersTable } from "@/db/schema";
-import { newId } from "@/db/id";
 
-export const homePlugin = new Elysia()
+
+export const home = new Elysia()
   .use(kitPlugin())
   .get("/", () => {
     return (
@@ -26,27 +25,4 @@ export const homePlugin = new Elysia()
         </form>
       </BaseLayout>
     )
-  })
-  .post("/user-form", async (ctx) => {
-    const { email, password } = ctx.body;
-    const { db } = ctx.store.kit;
-
-    await db.insert(usersTable).values({
-      email,
-      password,
-      id: newId(),
-      age: 13,
-    });
-
-    return (
-      <div>
-        done!
-      </div>
-    );
-
-  }, {
-    body: t.Object({
-      email: t.String(),
-      password: t.String(),
-    }),
   })

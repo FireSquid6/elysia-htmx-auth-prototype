@@ -1,6 +1,7 @@
 import { type User, type Session, sessionsTable, usersTable } from "./schema";
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding";
 import type { Database } from ".";
+import { newId } from "./id";
 import { sha256 } from "@oslojs/crypto/sha2";
 import { eq } from "drizzle-orm";
 
@@ -62,3 +63,35 @@ export async function invalidateSession(db: Database, sessionId: string): Promis
 export type SessionValidationResult =
   | { session: Session, user: User }
   | { session: null, user: null };
+
+export async function createUser(db: Database, user: Omit<User, "id">): Promise<string> {
+  const id = newId();
+
+  await db.insert(usersTable).values({
+    id,
+    ...user,
+  });
+
+  return id;
+}
+
+export async function getUserByEmail(db: Database, email: string): Promise<User | null> {
+  const users = await db.select().from(usersTable).where(eq(usersTable.email, email));
+
+  if (users.length === 0) { 
+    return null
+  }
+
+  return users[0];
+}
+
+
+export async function getUserById(db: Database, id: string): Promise<User | null> {
+  const users = await db.select().from(usersTable).where(eq(usersTable.id, id));
+
+  if (users.length === 0) { 
+    return null
+  }
+
+  return users[0];
+}

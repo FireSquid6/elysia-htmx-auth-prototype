@@ -1,12 +1,13 @@
 import Elysia from "elysia";
 import { cors } from "@elysiajs/cors";
 import { html } from "@elysiajs/html";
+import { Html } from "@kitajs/html";
 import { Logestic } from "logestic";
 import staticPlugin from "@elysiajs/static";
-import { homePlugin } from "./home";
+import { home } from "./home";
+import { dashboard } from "./dashboard";
+import { auth } from "./auth";
 import { kitPlugin } from "@/app";
-
-
 
 export const app = new Elysia()
   .use(kitPlugin())
@@ -17,6 +18,8 @@ export const app = new Elysia()
     prefix: "/static",
   }))
   .use(Logestic.preset("common"))
-  .use(homePlugin)
+  .use(home)
+  .use(auth)
+  .use(dashboard)
 
 export type App = typeof app;
