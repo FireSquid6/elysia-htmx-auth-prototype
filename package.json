@@ -2,6 +2,9 @@
   "name": "elysia-htmx-auth-prototype",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "bun run entrypoints/dev.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

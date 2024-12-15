@@ -1,8 +1,4 @@
 import { app } from "@/routes";
-import Elysia from "elysia";
-
-export const kitPlugin = new Elysia()
-  .state("kit", {} as Kit)
 
 export interface Kit {
   config: Config;
