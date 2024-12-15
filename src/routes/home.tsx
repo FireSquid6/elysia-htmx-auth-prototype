@@ -7,7 +7,7 @@ export const homePlugin = new Elysia()
     return (
       <BaseLayout>
         <h1>Title</h1>
-        <p>Hello, world!</p>
+        <p class="text-blue-500">Hello, world!</p>
         <a href="/todos">todos page</a>
       </BaseLayout>
     )
