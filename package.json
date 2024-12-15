@@ -6,8 +6,7 @@
     "dev": "bun run tailwind && bun run entrypoints/dev.ts",
     "tailwind": "bunx tailwindcss -i ./static/main.css -o ./static/generated.css",
     "push": "bunx drizzle-kit push --config=drizzle.config.ts",
-    "generate": "bunx drizzle-kit generate --config=drizzle.config.ts",
-    "migrate": "bunx drizzle-kit migrate --config=drizzle.config.ts"
+    "generate": "bunx drizzle-kit generate --config=drizzle.config.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -26,6 +25,8 @@
     "@libsql/client": "^0.14.0",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
+    "@tailwindcss/typography": "^0.5.15",
+    "daisyui": "^4.12.22",
     "drizzle-orm": "^0.38.2",
     "elysia": "^1.1.26",
     "logestic": "^1.2.4",
