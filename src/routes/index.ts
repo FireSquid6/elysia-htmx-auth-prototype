@@ -4,6 +4,7 @@ import { cors } from "@elysiajs/cors";
 import { html } from "@elysiajs/html";
 import { Logestic } from "logestic";
 import staticPlugin from "@elysiajs/static";
+import { homePlugin } from "./home";
 
 export const kitPlugin = new Elysia()
   .state("kit", {} as Kit)
@@ -17,8 +18,6 @@ export const app = new Elysia()
     prefix: "/static",
   }))
   .use(Logestic.preset("common"))
-  .get("/", () => {
-    return "hello, world!"
-  })
+  .use(homePlugin)
 
 export type App = typeof app;
