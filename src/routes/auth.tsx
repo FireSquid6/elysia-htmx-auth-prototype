@@ -5,8 +5,11 @@ import { BaseLayout } from "@/layouts/base";
 
 export const auth = new Elysia()
   .get("/login", () => {
-    return <div></div>
-
+    return (
+      <BaseLayout>
+        <></>
+      </BaseLayout>
+    )
   })
   .post("/login", () => {
 
