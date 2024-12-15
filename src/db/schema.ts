@@ -14,7 +14,7 @@ export type Session = InferSelectModel<typeof sessionsTable>
 
 export const sessionsTable = sqliteTable("sessions", {
   id: text("id").primaryKey(),
-  userId: int("user_id").notNull().references(() => usersTable.id),
+  userId: text("user_id").notNull().references(() => usersTable.id),
   expiresAt: int("expires_at", {
     mode: "timestamp"
   }).notNull()
