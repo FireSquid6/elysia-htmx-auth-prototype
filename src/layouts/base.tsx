@@ -1,7 +1,7 @@
 import { Html } from "@kitajs/html";
 
 export function BaseLayout(props: {
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }) {
   return (
     <html>

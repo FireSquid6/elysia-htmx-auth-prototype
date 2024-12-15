@@ -4,10 +4,8 @@ import { BaseLayout } from "@/layouts/base";
 export function HomePage() {
   return (
     <BaseLayout>
-      <>
-        <p>Hello, world!</p>
-        <a>This is some stuff!</a>
-      </>
+      <p>Hello, world!</p>
+      <a>This is some stuff!</a>
     </BaseLayout>
   )
 }
