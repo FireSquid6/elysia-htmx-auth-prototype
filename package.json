@@ -6,6 +6,7 @@
     "dev": "bun run tailwind && bun run entrypoints/dev.ts",
     "tailwind": "bunx tailwindcss -i ./static/main.css -o ./static/generated.css",
     "push": "bunx drizzle-kit push --config=drizzle.config.ts",
+    "pull": "bunx drizzle-kit pull --config=drizzle.config.ts",
     "generate": "bunx drizzle-kit generate --config=drizzle.config.ts"
   },
   "devDependencies": {

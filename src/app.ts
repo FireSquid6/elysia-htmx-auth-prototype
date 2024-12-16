@@ -1,6 +1,7 @@
 import { app } from "@/routes";
 import { Elysia } from "elysia";
 import { getDb, type Database } from "./db";
+import { validateSessionToken, type SessionValidationResult } from "./db/auth";
 
 export interface Kit {
   config: Config;
@@ -17,6 +18,18 @@ export interface Config {
 export function kitPlugin() {
   return new Elysia()
     .state("kit", {} as Kit)
+    .derive(async ({ cookie: { session }, store: { kit } }): Promise<SessionValidationResult> => {
+      const token = session.value;
+
+      if (token === undefined) {
+        return {
+          session: null,
+          user: null,
+        }
+      }
+      const result = await validateSessionToken(kit.db, token);
+      return result;
+    })
 }
 
 export function makeConfig(config: Partial<Config>): Config {

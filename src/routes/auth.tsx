@@ -3,8 +3,24 @@ import { Html } from "@kitajs/html";
 import { BaseLayout } from "@/layouts/base";
 import { TextInput } from "@/components/form";
 import { kitPlugin } from "@/app";
-import { createSession, generateSessionToken, getUserByEmail, verifyPasswordHash } from "@/db/auth";
+import { createSession, createUser, generateSessionToken, getUserByEmail, invalidateSession, verifyPasswordHash } from "@/db/auth";
+import type { Config } from "@/app";
 
+function makeCookie(config: Config, token: string, expiresAt: Date): string {
+let cookie = ""
+
+switch (config.environment) {
+  case "prod":
+    cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/; Secure;`;
+    break;
+  case "dev":
+    cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/;`;
+    break;
+}
+
+  return cookie
+
+}
 
 export const auth = new Elysia()
   .use(kitPlugin)
@@ -14,8 +30,10 @@ export const auth = new Elysia()
         <form hx-target="#error" hx-post="/login">
           <div id="error" />
           <TextInput name="email" type="email" label="Email" />
-          <TextInput name="username" label="Username"/>
           <TextInput name="password" type="password" label="Password" />
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+          <a href="/signup">Sign up instead</a>
         </form>
       </BaseLayout>
     )
@@ -43,18 +61,9 @@ export const auth = new Elysia()
     }
 
     const token = generateSessionToken();
-    const { expiresAt } = await createSession(db, token, result.id);
-    let cookie = ""
+    const session = await createSession(db, token, result.id);
 
-    switch (config.environment) {
-      case "prod":
-        cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/; Secure;`;
-        break;
-      case "dev":
-        cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/;`;
-        break;
-    }
-    ctx.headers["Set-Cookie"] = cookie;
+    ctx.set.headers["set-cookie"] = makeCookie(config, token, session.expiresAt);
     ctx.redirect("/dashboard", 301) 
   }, {
     body: t.Object({
@@ -63,11 +72,54 @@ export const auth = new Elysia()
     }),
   })
   .get("/signup", () => {
+    // TODO - confirm password
+    return (
+      <BaseLayout>
+        <form hx-target="#error" hx-post="/signup">
+          <div id="error" />
+          <TextInput name="email" type="email" label="Email" />
+          <TextInput name="username" label="Username"/>
+          <TextInput name="password" type="password" label="Password" />
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+          <a href="/login">Sign in instead</a>
+        </form>
+      </BaseLayout>
+    )
 
   })
-  .post("/signup", () => {
+  .post("/signup", async (ctx) => {
+    const { db, config } = ctx.store.kit;
+    const { email, password, username } = ctx.body;
 
-  })
-  .post('/logout', () => {
+    const id = await createUser(db, {
+      email,
+      password,
+      username,
+    })
+    
+    const token = generateSessionToken();
+    const session = await createSession(db, token, id);
+    ctx.set.headers["set-cookie"] = makeCookie(config, token, session.expiresAt);
+    ctx.redirect("/dashboard", 301);
 
+  }, {
+    body: t.Object({
+      email: t.String(),
+      password: t.String(),
+      username: t.String(),
+    })
   })
+  .post('/logout', (ctx) => {
+    const { session, store: { kit } } = ctx;
+
+    if (session === null) {
+      ctx.set.status = "Unauthorized";
+      return;
+    }
+
+    invalidateSession(kit.db, session.id);
+    ctx.set.headers["set-cookie"] = makeCookie(kit.config, "", new Date());
+  })
+
+
