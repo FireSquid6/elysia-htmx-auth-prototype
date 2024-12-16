@@ -9,7 +9,7 @@ export const home = new Elysia()
   .get("/", () => {
     return (
       <BaseLayout>
-        <h1>Title</h1>
+        <h1>A new thing</h1>
         <a hx-boost="true" href="/login">Sign In</a>
       </BaseLayout>
     )
