@@ -1,4 +1,5 @@
-import { Html, type Children } from "@kitajs/html";
+import { Html } from "@kitajs/html";
+import type { Children } from ".";
 
 export function BaseLayout(props: {
   children: Children
