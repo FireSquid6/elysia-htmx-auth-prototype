@@ -1,14 +1,4 @@
 import { Html } from "@kitajs/html";
-import type { Children } from "@/layouts";
-
-export function Form(children: Children) {
-  return (
-    <form>
-      {children}
-    </form>
-  )
-}
-
 
 type TextInputProps = {
   name: string,

@@ -9,6 +9,12 @@ import { dashboard } from "./dashboard";
 import { auth } from "./auth";
 import { kitPlugin } from "@/app";
 
+// all routes should be consumed here
+export const routes = new Elysia()
+  .use(home)
+  .use(auth)
+  .use(dashboard)
+
 export const app = new Elysia()
   .use(kitPlugin())
   .use(cors())
@@ -18,8 +24,9 @@ export const app = new Elysia()
     prefix: "/static",
   }))
   .use(Logestic.preset("common"))
-  .use(home)
-  .use(auth)
-  .use(dashboard)
+  .use(routes)
+
+
+
 
 export type App = typeof app;

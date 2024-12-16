@@ -11,6 +11,7 @@ export interface Config {
   port: number;
   url: string;
   token: string;
+  environment: "prod" | "dev";
 }
 
 export function kitPlugin() {
@@ -19,11 +20,11 @@ export function kitPlugin() {
 }
 
 export function makeConfig(config: Partial<Config>): Config {
-
   return {
     port: config.port ?? 3120,
     url: config.url ?? "",
     token: config.token ?? "",
+    environment: config.environment ?? "dev",
   }
 }
 
