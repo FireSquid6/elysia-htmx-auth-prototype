@@ -27,13 +27,12 @@ export const auth = new Elysia()
   .get("/login", () => {
     return (
       <BaseLayout>
-        <form hx-target="#error" hx-post="/login">
-          <div id="error" />
+        <form hx-post="/login">
           <TextInput name="email" type="email" label="Email" />
           <TextInput name="password" type="password" label="Password" />
           <button type="submit" class="btn btn-primary">Submit</button>
 
-          <a href="/signup">Sign up instead</a>
+          <a hx-boost="true" href="/signup">Sign up instead</a>
         </form>
       </BaseLayout>
     )
@@ -64,7 +63,7 @@ export const auth = new Elysia()
     const session = await createSession(db, token, result.id);
 
     ctx.set.headers["set-cookie"] = makeCookie(config, token, session.expiresAt);
-    ctx.redirect("/dashboard", 301) 
+    ctx.set.headers["HX-Redirect"] ="/dashboard";
   }, {
     body: t.Object({
       email: t.String(),
@@ -75,14 +74,13 @@ export const auth = new Elysia()
     // TODO - confirm password
     return (
       <BaseLayout>
-        <form hx-target="#error" hx-post="/signup">
-          <div id="error" />
+        <form hx-post="/signup">
           <TextInput name="email" type="email" label="Email" />
           <TextInput name="username" label="Username"/>
           <TextInput name="password" type="password" label="Password" />
           <button type="submit" class="btn btn-primary">Submit</button>
 
-          <a href="/login">Sign in instead</a>
+          <a hx-boost="true" href="/login">Sign in instead</a>
         </form>
       </BaseLayout>
     )
@@ -101,7 +99,7 @@ export const auth = new Elysia()
     const token = generateSessionToken();
     const session = await createSession(db, token, id);
     ctx.set.headers["set-cookie"] = makeCookie(config, token, session.expiresAt);
-    ctx.redirect("/dashboard", 301);
+    ctx.set.headers["HX-Redirect"] ="/dashboard";
 
   }, {
     body: t.Object({
