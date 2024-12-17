@@ -8,7 +8,6 @@ const START_COMMAND = "bun run entrypoints/dev.ts";
 const TOPIC_NAME = "update";
 const PORT: number = 3230
 
-
 function isNumeric(s: string): boolean {
   return !isNaN(parseFloat(s));
 }

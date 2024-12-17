@@ -68,6 +68,13 @@ export type SessionValidationResult =
 export async function createUser(db: Database, user: Omit<User, "id">): Promise<string> {
   const id = newId();
 
+  user.password = await hash(user.password, {
+    memoryCost: 19456,
+    timeCost: 2,
+    outputLen: 32,
+    parallelism: 1,
+  })
+
   await db.insert(usersTable).values({
     id,
     ...user,

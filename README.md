@@ -16,6 +16,8 @@
 - [x] separate prod and dev databases
 - [x] rebuild on watch
 - [ ] scripts are smarter and auto adapt to prod or dev with args
+- [ ] dockerfile
+- [ ] seeding script
 
 ## Make it...
 - [ ] Look pretty
