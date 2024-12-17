@@ -13,6 +13,7 @@
         flyctl
         typescript
         turso-cli
+        sqld
       ];
     };
   };

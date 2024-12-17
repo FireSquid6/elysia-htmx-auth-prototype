@@ -14,7 +14,7 @@
 
 ## Good DX
 - [ ] separate prod and dev databases
-- [ ] rebuild on watch
+- [x] rebuild on watch
 
 ## Make it...
 - [ ] Look pretty
