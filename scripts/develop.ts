@@ -87,7 +87,7 @@ function main() {
     // we ensure that too many rebuilds can't happen
     setTimeout(() => {
       canRebuild = true;
-    }, 100);
+    }, 200);
 
     server.publish(TOPIC_NAME, "reload");
   })

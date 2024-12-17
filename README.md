@@ -13,7 +13,7 @@
 - [ ] creating posts
 
 ## Good DX
-- [ ] separate prod and dev databases
+- [x] separate prod and dev databases
 - [x] rebuild on watch
 
 ## Make it...
