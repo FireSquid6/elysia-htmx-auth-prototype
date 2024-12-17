@@ -14,6 +14,7 @@ function isNumeric(s: string): boolean {
 }
 
 let subprocess: Subprocess<"ignore", "inherit", "inherit"> | null = null;
+let canRebuild: boolean = true;
 
 function restartProcess() {
   Bun.spawnSync(TAILWIND_BUILD_COMMAND.split(" "), {
@@ -57,6 +58,10 @@ function main() {
   const filepath = path.join(process.cwd(), "src");
 
   const watcher = watch(filepath, { recursive: true }, (_, filename) => {
+    if (!canRebuild) {
+      return;
+    }
+
     if (filename === null) {
       return;
     }
@@ -76,7 +81,13 @@ function main() {
     console.log("---------------------");
     console.log(`Change in ${filename}`);
     console.log("---------------------");
+    canRebuild = false;
     restartProcess();
+
+    // we ensure that too many rebuilds can't happen
+    setTimeout(() => {
+      canRebuild = true;
+    }, 100);
 
     server.publish(TOPIC_NAME, "reload");
   })
