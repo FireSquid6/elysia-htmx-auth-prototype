@@ -15,6 +15,7 @@
 ## Good DX
 - [x] separate prod and dev databases
 - [x] rebuild on watch
+- [ ] scripts are smarter and auto adapt to prod or dev with args
 
 ## Make it...
 - [ ] Look pretty
