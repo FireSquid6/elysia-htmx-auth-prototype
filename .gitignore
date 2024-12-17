@@ -7,3 +7,5 @@ static/generated.css
 .env.local
 .env
 drizzle
+
+databases
