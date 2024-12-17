@@ -17,7 +17,8 @@
 - [x] rebuild on watch
 - [ ] scripts are smarter and auto adapt to prod or dev with args
 - [ ] dockerfile
-- [ ] seeding script
+- [x] seeding script
+- [ ] htmx + alpine are built from node_modules 
 
 ## Make it...
 - [ ] Look pretty
