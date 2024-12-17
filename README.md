@@ -19,6 +19,7 @@
 - [ ] dockerfile
 - [x] seeding script
 - [ ] htmx + alpine are built from node_modules 
+- [ ] use surreal.js
 
 ## Make it...
 - [ ] Look pretty
