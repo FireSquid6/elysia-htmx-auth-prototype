@@ -29,6 +29,7 @@
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
     "@tailwindcss/typography": "^0.5.15",
+    "chalk": "^5.3.0",
     "daisyui": "^4.12.22",
     "drizzle-orm": "^0.38.2",
     "elysia": "^1.1.26",

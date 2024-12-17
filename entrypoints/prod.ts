@@ -11,6 +11,6 @@ if (url === undefined || token === undefined) {
 
 
 startApp({
-  url,
-  token,
+  databaseUrl: url,
+  databaseToken: token,
 });

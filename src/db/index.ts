@@ -6,8 +6,8 @@ export type Database = ReturnType<typeof getDb>
 export function getDb(config: Config) {
   return drizzle({
     connection: {
-      url: config.url,
-      authToken: config.token,
+      url: config.databaseUrl,
+      authToken: config.databaseToken,
     }
   })
 }

@@ -2,6 +2,7 @@ import { app } from "@/routes";
 import { Elysia } from "elysia";
 import { getDb, type Database } from "./db";
 import { validateSessionToken, type SessionValidationResult } from "./db/auth";
+import chalk from "chalk";
 
 export interface Kit {
   config: Config;
@@ -10,8 +11,8 @@ export interface Kit {
 
 export interface Config {
   port: number;
-  url: string;
-  token: string;
+  databaseUrl: string;
+  databaseToken: string;
   environment: "prod" | "dev";
 }
 
@@ -35,8 +36,8 @@ export function kitPlugin() {
 export function makeConfig(config: Partial<Config>): Config {
   return {
     port: config.port ?? 3120,
-    url: config.url ?? "",
-    token: config.token ?? "",
+    databaseUrl: config.databaseUrl ?? "",
+    databaseToken: config.databaseToken ?? "",
     environment: config.environment ?? "dev",
   }
 }
@@ -53,6 +54,10 @@ export function startApp(c: Partial<Config>) {
   app.store.kit = kit;
 
   app.listen(config.port, () => {
-    console.log(`🚀 App started on http://localhost:${config.port}`);
+    const url = chalk.blue.bold(`http://localhost:${config.port}`)
+    const dbUrl = chalk.blue.bold(config.databaseUrl);
+    console.log(`🚀 App started on ${url}`);
+    console.log(`💾 Database connected too ${dbUrl}`);
+    console.log();
   })
 }

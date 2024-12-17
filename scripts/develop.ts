@@ -35,7 +35,6 @@ function restartProcess() {
 function main() {
   restartProcess();
 
-  console.log("Done with process");
   const server = Bun.serve({
     port: PORT,
     fetch(req, server) {
@@ -76,6 +75,7 @@ function main() {
 
     console.log("---------------------");
     console.log(`Change in ${filename}`);
+    console.log("---------------------");
     restartProcess();
 
     server.publish(TOPIC_NAME, "reload");

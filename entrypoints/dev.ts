@@ -10,5 +10,5 @@ if (url === undefined) {
 
 
 startApp({
-  url,
+  databaseUrl: url,
 });
