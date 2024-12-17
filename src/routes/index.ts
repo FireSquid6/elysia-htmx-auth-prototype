@@ -11,9 +11,14 @@ import { swagger } from "@elysiajs/swagger";
 
 // all routes should be consumed here
 export const routes = new Elysia()
+  .get("/something-else", () => {
+    return "blah";
+  })
   .use(home)
   .use(auth)
   .use(dashboard)
+
+export const devPlugin = new Elysia()
 
 
 export const app = new Elysia()
@@ -27,6 +32,10 @@ export const app = new Elysia()
   .use(swagger())
   .use(Logestic.preset("common"))
   .use(routes)
+  .get("/favicon.ico", () => {
+    return Bun.file("./static/favicon.ico");
+  });
+
 
 
 

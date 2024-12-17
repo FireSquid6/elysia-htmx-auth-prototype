@@ -53,6 +53,6 @@ export function startApp(c: Partial<Config>) {
   app.store.kit = kit;
 
   app.listen(config.port, () => {
-    console.log(`App started on ${config.port}`);
+    console.log(`🚀 App started on http://localhost:${config.port}`);
   })
 }

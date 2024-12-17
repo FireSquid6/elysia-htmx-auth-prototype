@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch entrypoints/dev.ts",
+    "dev": "bun run entrypoints/dev.ts",
     "tailwind": "bunx tailwindcss -i ./static/main.css -o ./static/generated.css",
     "push": "bunx drizzle-kit push --config=drizzle.config.ts",
     "pull": "bunx drizzle-kit pull --config=drizzle.config.ts",

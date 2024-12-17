@@ -7,7 +7,8 @@ export function BaseLayout(props: {
   return (
     <html>
       <head>
-        <script src="/static/htmx.min.js" />
+        <script defer src="/static/htmx.min.js" />
+        <script defer src="/static/dev.js" />
         <link rel="stylesheet" href="/static/generated.css" />
         <title>An example site</title>
       </head>

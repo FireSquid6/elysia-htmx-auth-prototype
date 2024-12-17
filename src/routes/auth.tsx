@@ -7,16 +7,16 @@ import { createSession, createUser, generateSessionToken, getUserByEmail, invali
 import type { Config } from "@/app";
 
 function makeCookie(config: Config, token: string, expiresAt: Date): string {
-let cookie = ""
+  let cookie = ""
 
-switch (config.environment) {
-  case "prod":
-    cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/; Secure;`;
-    break;
-  case "dev":
-    cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/;`;
-    break;
-}
+  switch (config.environment) {
+    case "prod":
+      cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/; Secure;`;
+      break;
+    case "dev":
+      cookie = `session=${token}; HttpOnly; SameSite=Lax, Expires=${expiresAt.toUTCString()}; Path=/;`;
+      break;
+  }
 
   return cookie
 
@@ -63,7 +63,7 @@ export const auth = new Elysia()
     const session = await createSession(db, token, result.id);
 
     ctx.set.headers["set-cookie"] = makeCookie(config, token, session.expiresAt);
-    ctx.set.headers["HX-Redirect"] ="/dashboard";
+    ctx.set.headers["HX-Redirect"] = "/dashboard";
   }, {
     body: t.Object({
       email: t.String(),
@@ -76,7 +76,7 @@ export const auth = new Elysia()
       <BaseLayout>
         <form hx-post="/signup">
           <TextInput name="email" type="email" label="Email" />
-          <TextInput name="username" label="Username"/>
+          <TextInput name="username" label="Username" />
           <TextInput name="password" type="password" label="Password" />
           <button type="submit" class="btn btn-primary">Submit</button>
 
@@ -95,11 +95,11 @@ export const auth = new Elysia()
       password,
       username,
     })
-    
+
     const token = generateSessionToken();
     const session = await createSession(db, token, id);
     ctx.set.headers["set-cookie"] = makeCookie(config, token, session.expiresAt);
-    ctx.set.headers["HX-Redirect"] ="/dashboard";
+    ctx.set.headers["HX-Redirect"] = "/dashboard";
 
   }, {
     body: t.Object({
